@@ -14,7 +14,11 @@
 # under the License.
 
 
-from neutron.agent.common import config
+try:
+    from neutron.conf.agent import common as config
+except ImportError:
+    # Neutron code prior to 7f23ccc (15th March 2017).
+    from neutron.agent.common import config
 
 from neutron_taas._i18n import _
 from neutron_taas.common import topics

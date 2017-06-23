@@ -21,7 +21,12 @@ eventlet.monkey_patch()
 from oslo_config import cfg
 from oslo_service import service
 
-from neutron.agent.common import config
+try:
+    from neutron.conf.agent import common as config
+except ImportError:
+    # Neutron code prior to 7f23ccc (15th March 2017).
+    from neutron.agent.common import config
+
 from neutron.common import config as common_config
 from neutron.common import rpc as n_rpc
 
